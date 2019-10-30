@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.1.textures", "LearnOpenGL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.2.textures_combined", "LearnOpenGL\src\1.getting_started\4.2.textures_combined\4.2.textures_combined.csproj", "{BE837E58-866F-4F8E-94B7-176C2663A3D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.3.textures_exercise2", "LearnOpenGL\src\1.getting_started\4.3.textures_exercise2\4.3.textures_exercise2.csproj", "{B1E20F3F-F507-4797-91C3-4918005DD0F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{BE837E58-866F-4F8E-94B7-176C2663A3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE837E58-866F-4F8E-94B7-176C2663A3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE837E58-866F-4F8E-94B7-176C2663A3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +156,7 @@ Global
 		{ADD31D03-2169-40AB-BA15-43E295EFCF0C} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 		{370E84B3-3CCE-45AB-BB71-FC6B456950BF} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 		{BE837E58-866F-4F8E-94B7-176C2663A3D4} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
+		{B1E20F3F-F507-4797-91C3-4918005DD0F5} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}
