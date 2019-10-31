@@ -57,6 +57,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.2.textures_combined", "Le
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.3.textures_exercise2", "LearnOpenGL\src\1.getting_started\4.3.textures_exercise2\4.3.textures_exercise2.csproj", "{B1E20F3F-F507-4797-91C3-4918005DD0F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.4.textures_exercise3", "LearnOpenGL\src\1.getting_started\4.4.textures_exercise3\4.4.textures_exercise3.csproj", "{96042AFB-6F7F-4C17-B306-AFA47AB72611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.5.textures_exercise4", "LearnOpenGL\src\1.getting_started\4.5.textures_exercise4\4.5.textures_exercise4.csproj", "{211F8F72-C7D8-4D45-A005-F4869215D909}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +131,14 @@ Global
 		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1E20F3F-F507-4797-91C3-4918005DD0F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96042AFB-6F7F-4C17-B306-AFA47AB72611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96042AFB-6F7F-4C17-B306-AFA47AB72611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96042AFB-6F7F-4C17-B306-AFA47AB72611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96042AFB-6F7F-4C17-B306-AFA47AB72611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211F8F72-C7D8-4D45-A005-F4869215D909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211F8F72-C7D8-4D45-A005-F4869215D909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211F8F72-C7D8-4D45-A005-F4869215D909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211F8F72-C7D8-4D45-A005-F4869215D909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +169,8 @@ Global
 		{370E84B3-3CCE-45AB-BB71-FC6B456950BF} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 		{BE837E58-866F-4F8E-94B7-176C2663A3D4} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 		{B1E20F3F-F507-4797-91C3-4918005DD0F5} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
+		{96042AFB-6F7F-4C17-B306-AFA47AB72611} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
+		{211F8F72-C7D8-4D45-A005-F4869215D909} = {75CEC32A-E7DD-42C0-8029-96280F8AABE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}

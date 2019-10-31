@@ -12,7 +12,7 @@ using SharpGL.SceneGraph.Assets;
 using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 
-namespace _4._3.textures_exercise2
+namespace _4._4.textures_exercise3
 {
     public partial class Form1 : Form
     {
@@ -41,10 +41,10 @@ namespace _4._3.textures_exercise2
         /// </summary>
         private float[] vertices = {
                 // 位置              // 颜色              // 纹理坐标
-                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f, // 右上
-                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f, // 右下
-                -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // 左下
-                -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 2.0f  // 左上
+                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   0.55f, 0.55f, // 右上
+                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   0.55f, 0.45f, // 右下
+                -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.45f, 0.45f, // 左下
+                -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.45f, 0.55f  // 左上
         };
 
         /// <summary>
@@ -91,15 +91,21 @@ namespace _4._3.textures_exercise2
 
             //创建纹理
             texture1.Create(GL, "container.jpg");
-
             //设置WARP模式为CLAMP_TO_EDGE
             GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_S, OpenGL.GL_CLAMP_TO_EDGE);
             GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_CLAMP_TO_EDGE);
+            //设置缩小和放大Filter为NEAREST
+            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_NEAREST);
+            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_NEAREST);
 
-            //设置WARP模式为REPEAT
+            //创建纹理
             texture2.Create(GL, "awesomeface.png");
+            //设置WARP模式为REPEAT
             GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_S, OpenGL.GL_REPEAT);
             GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_REPEAT);
+            //设置缩小和放大Filter为NEAREST
+            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_NEAREST);
+            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_NEAREST);
         }
 
         /// <summary>
@@ -153,12 +159,12 @@ namespace _4._3.textures_exercise2
             //获取OpenGL对象
             GL = openGLControl1.OpenGL;
 
-            using (StreamReader sr = new StreamReader("4.3.texture.vs"))
+            using (StreamReader sr = new StreamReader("4.4.texture.vs"))
             {
                 vertexShaderSource = sr.ReadToEnd();
             }
 
-            using (StreamReader sr = new StreamReader("4.3.texture.fs"))
+            using (StreamReader sr = new StreamReader("4.4.texture.fs"))
             {
                 fragmentShaderSource = sr.ReadToEnd();
             }

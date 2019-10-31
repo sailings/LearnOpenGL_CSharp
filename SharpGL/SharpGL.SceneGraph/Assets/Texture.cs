@@ -131,6 +131,8 @@ namespace SharpGL.SceneGraph.Assets
                 image = (Bitmap)newImage;
             }
 
+            image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
             //  Lock the image bits (so that we can pass them to OGL).
             BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
                 ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);

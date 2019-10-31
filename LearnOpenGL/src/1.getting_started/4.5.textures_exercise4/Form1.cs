@@ -12,7 +12,7 @@ using SharpGL.SceneGraph.Assets;
 using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 
-namespace _4._3.textures_exercise2
+namespace _4._5.textures_exercise4
 {
     public partial class Form1 : Form
     {
@@ -41,10 +41,10 @@ namespace _4._3.textures_exercise2
         /// </summary>
         private float[] vertices = {
                 // 位置              // 颜色              // 纹理坐标
-                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f, // 右上
-                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f, // 右下
+                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // 右上
+                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // 右下
                 -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // 左下
-                -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 2.0f  // 左上
+                -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // 左上
         };
 
         /// <summary>
@@ -85,6 +85,11 @@ namespace _4._3.textures_exercise2
         /// </summary>
         private Texture texture2 = new Texture();
 
+        /// <summary>
+        /// 两张纹理显示的透明度
+        /// </summary>
+        private float mixValue = 0.2f;
+
         public Form1()
         {
             InitializeComponent();
@@ -92,14 +97,8 @@ namespace _4._3.textures_exercise2
             //创建纹理
             texture1.Create(GL, "container.jpg");
 
-            //设置WARP模式为CLAMP_TO_EDGE
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_S, OpenGL.GL_CLAMP_TO_EDGE);
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_CLAMP_TO_EDGE);
-
-            //设置WARP模式为REPEAT
+            //创建纹理
             texture2.Create(GL, "awesomeface.png");
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_S, OpenGL.GL_REPEAT);
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_REPEAT);
         }
 
         /// <summary>
@@ -117,6 +116,9 @@ namespace _4._3.textures_exercise2
 
             //使用着色器
             GL.UseProgram(shaderProgram.ShaderProgramObject);
+
+            //设置片元着色器中的mixValue值
+            shaderProgram.SetUniform1(GL, "mixValue", mixValue);
 
             //设置当前激活的纹理单元
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
@@ -153,12 +155,12 @@ namespace _4._3.textures_exercise2
             //获取OpenGL对象
             GL = openGLControl1.OpenGL;
 
-            using (StreamReader sr = new StreamReader("4.3.texture.vs"))
+            using (StreamReader sr = new StreamReader("4.5.texture.vs"))
             {
                 vertexShaderSource = sr.ReadToEnd();
             }
 
-            using (StreamReader sr = new StreamReader("4.3.texture.fs"))
+            using (StreamReader sr = new StreamReader("4.5.texture.fs"))
             {
                 fragmentShaderSource = sr.ReadToEnd();
             }
@@ -208,6 +210,23 @@ namespace _4._3.textures_exercise2
 
             //设置窗体的大小
             Size = new Size(SCR_WIDTH, SCR_HEIGHT);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Up)
+            {
+                mixValue += 0.01f;
+                if (mixValue >= 1.0f)
+                    mixValue = 1.0f;
+            }
+            else if (keyData == Keys.Down)
+            {
+                mixValue -= 0.01f;
+                if (mixValue <= 0.0f)
+                    mixValue = 0.0f;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
