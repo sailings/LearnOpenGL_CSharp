@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -47,6 +48,20 @@ namespace SharpGL.Shaders
             {
                 throw new ShaderCompilationException(string.Format("Failed to link shader program with ID {0}.", shaderProgramObject), GetInfoLog(gl));
             }
+        }
+
+        public void Create(OpenGL gl, string vertexFile, string fragmentFile)
+        {
+            string vertexShaderSource, fragmentShaderSource;
+            using (StreamReader sr = new StreamReader(vertexFile))
+            {
+                vertexShaderSource = sr.ReadToEnd();
+            }
+            using (StreamReader sr = new StreamReader(fragmentFile))
+            {
+                fragmentShaderSource = sr.ReadToEnd();
+            }
+            Create(gl, vertexShaderSource, fragmentShaderSource, null);
         }
 
         public void Delete(OpenGL gl)
