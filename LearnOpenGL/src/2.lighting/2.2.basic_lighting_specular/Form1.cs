@@ -107,7 +107,7 @@ namespace _2._2.basic_lighting_specular
         private DateTime startTime = DateTime.Now;
 
         //摄像机对象
-        Camera camera = new Camera(new vec3(0.0f, 0.0f, 6.0f), new vec3(0.0f, 1.0f, 0.0f));
+        Camera camera = new Camera(new vec3(0.0f, 0.0f, 3.0f), new vec3(0.0f, 1.0f, 0.0f));
 
         float lastX = SCR_WIDTH / 2.0f;
         float lastY = SCR_HEIGHT / 2.0f;
@@ -124,6 +124,8 @@ namespace _2._2.basic_lighting_specular
         public Form1()
         {
             InitializeComponent();
+
+            camera.Zoom=90.0f;
 
             openGLControl1.MouseWheel += OpenGLControl1_MouseWheel;
             openGLControl1.MouseMove += OpenGLControl1_MouseMove;
@@ -186,6 +188,9 @@ namespace _2._2.basic_lighting_specular
             //使用立方体着色器
             GL.UseProgram(cubeShaderProgram.ShaderProgramObject);
 
+            lightPos.x = 1.0f + glm.sin(GetTime()) * 2.0f;
+            lightPos.y = glm.sin(GetTime() / 2.0f) * 1.0f;
+
             //设置着色器中的颜色值
             cubeShaderProgram.SetUniform3(GL,"objectColor", 1.0f, 0.5f, 0.31f);
             cubeShaderProgram.SetUniform3(GL, "lightColor", 1.0f, 1.0f, 1.0f);
@@ -197,7 +202,7 @@ namespace _2._2.basic_lighting_specular
             mat4 view = camera.GetViewMatrix();
             cubeShaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
             cubeShaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
-            mat4 model = new mat4(1.0f);
+            mat4 model = new mat4(2.0f);
             cubeShaderProgram.SetUniformMatrix4(GL,"model",model.to_array());
 
             //绑定立方体VAO
