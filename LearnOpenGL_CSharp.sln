@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.1.basic_lighting_diffuse"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.2.basic_lighting_specular", "LearnOpenGL\src\2.lighting\2.2.basic_lighting_specular\2.2.basic_lighting_specular.csproj", "{90A46D18-6A46-41FE-8420-04C505C745D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.1.materials", "LearnOpenGL\src\2.lighting\3.1.materials\3.1.materials.csproj", "{10E9876B-E989-43E7-9F40-F771FC71C316}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{90A46D18-6A46-41FE-8420-04C505C745D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90A46D18-6A46-41FE-8420-04C505C745D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90A46D18-6A46-41FE-8420-04C505C745D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10E9876B-E989-43E7-9F40-F771FC71C316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E9876B-E989-43E7-9F40-F771FC71C316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E9876B-E989-43E7-9F40-F771FC71C316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E9876B-E989-43E7-9F40-F771FC71C316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -255,6 +261,7 @@ Global
 		{38CDDC94-0087-4BA9-8853-F54513B2E299} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{9EF0503F-04E1-478A-8436-B9CAC19FA3CA} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{90A46D18-6A46-41FE-8420-04C505C745D7} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
+		{10E9876B-E989-43E7-9F40-F771FC71C316} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}
