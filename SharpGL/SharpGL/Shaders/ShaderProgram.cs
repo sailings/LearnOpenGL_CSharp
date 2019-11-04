@@ -11,6 +11,13 @@ namespace SharpGL.Shaders
         private readonly Shader vertexShader = new Shader();
         private readonly Shader fragmentShader = new Shader();
 
+        public Shader FragmentShader
+        {
+            get {
+                return fragmentShader;
+            }
+        }
+
         /// <summary>
         /// Creates the shader program.
         /// </summary>

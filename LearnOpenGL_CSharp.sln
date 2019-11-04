@@ -105,6 +105,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.4.light_casters_spot_soft
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.multiple_lights", "LearnOpenGL\src\2.lighting\6.multiple_lights\6.multiple_lights.csproj", "{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.model_loading", "LearnOpenGL\src\3.model_loading\1.model_loading\1.model_loading.csproj", "{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -271,6 +273,10 @@ Global
 		{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,6 +331,7 @@ Global
 		{A5CED1CE-3CE9-4FBC-8A54-ECF0AF63702D} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{3E096332-CC30-41E7-A363-8E0482B64636} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
+		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011} = {2B8BD04D-057F-45B3-810D-D6116237AC23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}
