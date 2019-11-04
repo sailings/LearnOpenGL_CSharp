@@ -74,7 +74,7 @@ namespace _1.model_loading
         }
 
         // render the mesh
-        public void Draw(Shader shader, OpenGL gl)
+        public void Draw(ShaderProgram shader, OpenGL gl)
         {
             // bind appropriate textures
             int diffuseNr = 1;
@@ -98,7 +98,8 @@ namespace _1.model_loading
 
                 // now set the sampler to the correct texture unit
                 //glUniform1i(glGetUniformLocation(shader.ShaderObject, (name + number)), i);
-                gl.Uniform1(gl.GetUniformLocation(shader.ShaderObject, name + number), i);
+                //gl.Uniform1(gl.GetUniformLocation(shader.ShaderObject, name + number), i);
+                shader.SetUniform1(gl, name + number, i);
                 // and finally bind the texture
                 gl.BindTexture(OpenGL.GL_TEXTURE_2D, (uint)textures[i].id);
             }

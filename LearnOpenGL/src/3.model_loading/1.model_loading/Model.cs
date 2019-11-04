@@ -34,7 +34,7 @@ namespace _1.model_loading
         }
 
         // draws the model, and thus all its meshes
-        public void Draw(Shader shader)
+        public void Draw(ShaderProgram shader)
         {
             for (int i = 0; i < meshes.Count; i++)
                 meshes[i].Draw(shader, gl);
@@ -204,9 +204,10 @@ namespace _1.model_loading
                 {   // if texture hasn't been loaded already, load it
                     SharpGL.SceneGraph.Assets.Texture txure = new SharpGL.SceneGraph.Assets.Texture();
                     txure.Create(gl, directory + "\\" + textureTmp.FilePath);
+                    //txure.TextureName
                     Texture texture = new Texture();
                     //texture.id = TextureFromFile(str.C_Str(), this->directory);
-                    texture.id = txure.Id;
+                    texture.id = (int)txure.TextureName;
                     texture.type = typeName;
                     //texture.path = str.C_Str();
                     texture.path = textureTmp.FilePath;
