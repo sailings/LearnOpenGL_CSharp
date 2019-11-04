@@ -124,14 +124,14 @@ namespace _1.model_loading
 
             mat4 projection = glm.perspective(glm.radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
             mat4 view = camera.GetViewMatrix();
-            shaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
-            shaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
+            shaderProgram.SetUniformMatrix4(GL, "projection", projection.to_array());
+            shaderProgram.SetUniformMatrix4(GL, "view", view.to_array());
 
             // render the loaded model
             mat4 model = new mat4(1.0f);
             model = glm.translate(model, new vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
             model = glm.scale(model, new vec3(0.2f, 0.2f, 0.2f)); // it's a bit too big for our scene, so scale it down
-            shaderProgram.SetUniformMatrix4(GL,"model", model.to_array());
+            shaderProgram.SetUniformMatrix4(GL, "model", model.to_array());
             ourModel.Draw(shaderProgram.FragmentShader);
 
 

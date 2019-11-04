@@ -166,9 +166,10 @@ namespace _1.model_loading
 
             //绑定vbo
             vbo.Bind(gl);
-            
+
+            float[] data = vertices.SelectMany(v => v.ToArray()).ToArray();
             //绑定数据
-            gl.BufferData(OpenGL.GL_ARRAY_BUFFER, vertices.SelectMany(v => v.ToArray()).ToArray(), OpenGL.GL_STATIC_DRAW);
+            gl.BufferData(OpenGL.GL_ARRAY_BUFFER, data, OpenGL.GL_STATIC_DRAW);
 
             //配置顶点属性
             gl.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, Marshal.SizeOf(typeof(Vertex)), IntPtr.Zero);

@@ -71,7 +71,8 @@ namespace _1.model_loading
                 // the node object only contains indices to index the actual objects in the scene. 
                 // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
                 //var mesh = scene->mMeshes[node->mMeshes[i]];
-                var mesh = scene.Meshes[i];
+                //var mesh = scene.Meshes[i];
+                var mesh = scene.Meshes.Find(a => a.Name == node.Name);
                 meshes.Add(ProcessMesh(mesh, scene));
                 //meshes.push_back(ProcessMesh(mesh, scene));
             }
