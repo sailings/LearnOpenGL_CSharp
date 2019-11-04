@@ -13,7 +13,7 @@ using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 using GlmNet;
 
-namespace _3._1.materials
+namespace _3._2.materials_exercise1
 {
     public partial class Form1 : Form
     {
@@ -189,37 +189,27 @@ namespace _3._1.materials
             GL.UseProgram(cubeShaderProgram.ShaderProgramObject);
 
             //设置光源位置和观察视角
-            cubeShaderProgram.SetUniform3(GL, "light.position", lightPos.x, lightPos.y, lightPos.z);
+            cubeShaderProgram.SetUniform3(GL,"light.position", lightPos.x, lightPos.y, lightPos.z);
             cubeShaderProgram.SetUniform3(GL, "viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
 
-            //光源颜色
-            vec3 lightColor = new vec3();
-            lightColor.x = glm.sin(GetTime() * 2.0f);
-            lightColor.y = glm.sin(GetTime() * 0.7f);
-            lightColor.z = glm.sin(GetTime() * 1.3f);
-
-            //漫反射颜色
-            vec3 diffuseColor = lightColor * new vec3(0.5f);
-
-            //环境光
-            vec3 ambientColor = diffuseColor * new vec3(0.2f);
-
-            //传递给材质
-            cubeShaderProgram.SetUniform3(GL, "light.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
-            cubeShaderProgram.SetUniform3(GL, "light.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
+            //光源属性
+            cubeShaderProgram.SetUniform3(GL, "light.ambient", 1.0f, 1.0f, 1.0f); // note that all light colors are set at full intensity
+            cubeShaderProgram.SetUniform3(GL, "light.diffuse", 1.0f, 1.0f, 1.0f);
             cubeShaderProgram.SetUniform3(GL, "light.specular", 1.0f, 1.0f, 1.0f);
-            cubeShaderProgram.SetUniform3(GL, "material.ambient", 1.0f, 0.5f, 0.31f);
-            cubeShaderProgram.SetUniform3(GL, "material.diffuse", 1.0f, 0.5f, 0.31f);
-            cubeShaderProgram.SetUniform3(GL, "material.specular", 0.5f, 0.5f, 0.5f);
+
+            //设置材质
+            cubeShaderProgram.SetUniform3(GL, "material.ambient", 0.0f, 0.1f, 0.06f);
+            cubeShaderProgram.SetUniform3(GL, "material.diffuse", 0.0f, 0.50980392f, 0.50980392f);
+            cubeShaderProgram.SetUniform3(GL, "material.specular", 0.50196078f, 0.50196078f, 0.50196078f);
             cubeShaderProgram.SetUniform1(GL, "material.shininess", 32.0f);
 
             //传递三个矩阵到着色器中
             mat4 projection = glm.perspective(glm.radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
             mat4 view = camera.GetViewMatrix();
-            cubeShaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
-            cubeShaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "projection", projection.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "view", view.to_array());
             mat4 model = new mat4(2.0f);
-            cubeShaderProgram.SetUniformMatrix4(GL,"model",model.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "model", model.to_array());
 
             //绑定立方体VAO
             cubeVAO.Bind(GL);
@@ -231,12 +221,12 @@ namespace _3._1.materials
             GL.UseProgram(lampShaderProgram.ShaderProgramObject);
 
             //传递三个矩阵到着色器中
-            lampShaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
-            lampShaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "projection", projection.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "view", view.to_array());
             model = new mat4(1.0f);
             model = glm.translate(model, lightPos);
             model = glm.scale(model, new vec3(0.2f));
-            lampShaderProgram.SetUniformMatrix4(GL,"model", model.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "model", model.to_array());
 
             //绑定光源VAO
             lightVAO.Bind(GL);
@@ -262,8 +252,8 @@ namespace _3._1.materials
             GL.Enable(OpenGL.GL_DEPTH_TEST);
 
             //创建两个Shader
-            cubeShaderProgram.Create(GL, "3.1.materials.vs", "3.1.materials.fs");
-            lampShaderProgram.Create(GL, "3.1.lamp.vs", "3.1.lamp.fs");
+            cubeShaderProgram.Create(GL, "3.2.materials.vs", "3.2.materials.fs");
+            lampShaderProgram.Create(GL, "3.2.lamp.vs", "3.2.lamp.fs");
 
             //创建立方体VAO
             cubeVAO.Create(GL);

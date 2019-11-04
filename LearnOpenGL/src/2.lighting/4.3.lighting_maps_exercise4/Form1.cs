@@ -13,7 +13,7 @@ using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 using GlmNet;
 
-namespace _3._1.materials
+namespace _4._3.lighting_maps_exercise4
 {
     public partial class Form1 : Form
     {
@@ -41,47 +41,48 @@ namespace _3._1.materials
         /// 顶点
         /// </summary>
         private float[] vertices = {
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         //位置               //法线                //纹理坐标
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
     };
 
         /// <summary>
@@ -121,6 +122,21 @@ namespace _3._1.materials
         /// </summary>
         vec3 lightPos = new vec3(1.2f, 1.0f, 2.0f);
 
+        /// <summary>
+        /// 光照贴图
+        /// </summary>
+        private Texture diffuseMap = new Texture();
+
+        /// <summary>
+        /// 高光贴图
+        /// </summary>
+        private Texture specularMap = new Texture();
+
+        /// <summary>
+        /// 放射光贴图
+        /// </summary>
+        private Texture emissionMap = new Texture();
+
         public Form1()
         {
             InitializeComponent();
@@ -129,6 +145,11 @@ namespace _3._1.materials
 
             openGLControl1.MouseWheel += OpenGLControl1_MouseWheel;
             openGLControl1.MouseMove += OpenGLControl1_MouseMove;
+
+            //加载贴图
+            diffuseMap.Create(GL, "container2.png");
+            specularMap.Create(GL, "container2_specular.png");
+            emissionMap.Create(GL, "matrix.jpg");
         }
 
         private void OpenGLControl1_MouseMove(object sender, MouseEventArgs e)
@@ -188,38 +209,39 @@ namespace _3._1.materials
             //使用立方体着色器
             GL.UseProgram(cubeShaderProgram.ShaderProgramObject);
 
+            //设置当前激活的纹理单元
+            GL.ActiveTexture(OpenGL.GL_TEXTURE0);
+
+            //绑定纹理贴图
+            diffuseMap.Bind(GL);
+
+            GL.ActiveTexture(OpenGL.GL_TEXTURE1);
+
+            specularMap.Bind(GL);
+
+            GL.ActiveTexture(OpenGL.GL_TEXTURE2);
+            emissionMap.Bind(GL);
+
             //设置光源位置和观察视角
             cubeShaderProgram.SetUniform3(GL, "light.position", lightPos.x, lightPos.y, lightPos.z);
             cubeShaderProgram.SetUniform3(GL, "viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
 
-            //光源颜色
-            vec3 lightColor = new vec3();
-            lightColor.x = glm.sin(GetTime() * 2.0f);
-            lightColor.y = glm.sin(GetTime() * 0.7f);
-            lightColor.z = glm.sin(GetTime() * 1.3f);
-
-            //漫反射颜色
-            vec3 diffuseColor = lightColor * new vec3(0.5f);
-
-            //环境光
-            vec3 ambientColor = diffuseColor * new vec3(0.2f);
-
-            //传递给材质
-            cubeShaderProgram.SetUniform3(GL, "light.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
-            cubeShaderProgram.SetUniform3(GL, "light.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
+            //光源属性
+            cubeShaderProgram.SetUniform3(GL, "light.ambient", 0.2f, 0.2f, 0.2f);
+            cubeShaderProgram.SetUniform3(GL, "light.diffuse", 0.5f, 0.5f, 0.5f);
             cubeShaderProgram.SetUniform3(GL, "light.specular", 1.0f, 1.0f, 1.0f);
-            cubeShaderProgram.SetUniform3(GL, "material.ambient", 1.0f, 0.5f, 0.31f);
-            cubeShaderProgram.SetUniform3(GL, "material.diffuse", 1.0f, 0.5f, 0.31f);
-            cubeShaderProgram.SetUniform3(GL, "material.specular", 0.5f, 0.5f, 0.5f);
-            cubeShaderProgram.SetUniform1(GL, "material.shininess", 32.0f);
 
+            //设置材质
+            //cubeShaderProgram.SetUniform3(GL, "material.specular", 0.5f, 0.5f, 0.5f);
+            cubeShaderProgram.SetUniform1(GL, "material.shininess", 64.0f);
+            
             //传递三个矩阵到着色器中
             mat4 projection = glm.perspective(glm.radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
             mat4 view = camera.GetViewMatrix();
-            cubeShaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
-            cubeShaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "projection", projection.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "view", view.to_array());
             mat4 model = new mat4(2.0f);
-            cubeShaderProgram.SetUniformMatrix4(GL,"model",model.to_array());
+            cubeShaderProgram.SetUniformMatrix4(GL, "model", model.to_array());
 
             //绑定立方体VAO
             cubeVAO.Bind(GL);
@@ -231,12 +253,12 @@ namespace _3._1.materials
             GL.UseProgram(lampShaderProgram.ShaderProgramObject);
 
             //传递三个矩阵到着色器中
-            lampShaderProgram.SetUniformMatrix4(GL,"projection", projection.to_array());
-            lampShaderProgram.SetUniformMatrix4(GL,"view", view.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "projection", projection.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "view", view.to_array());
             model = new mat4(1.0f);
             model = glm.translate(model, lightPos);
             model = glm.scale(model, new vec3(0.2f));
-            lampShaderProgram.SetUniformMatrix4(GL,"model", model.to_array());
+            lampShaderProgram.SetUniformMatrix4(GL, "model", model.to_array());
 
             //绑定光源VAO
             lightVAO.Bind(GL);
@@ -262,8 +284,20 @@ namespace _3._1.materials
             GL.Enable(OpenGL.GL_DEPTH_TEST);
 
             //创建两个Shader
-            cubeShaderProgram.Create(GL, "3.1.materials.vs", "3.1.materials.fs");
-            lampShaderProgram.Create(GL, "3.1.lamp.vs", "3.1.lamp.fs");
+            cubeShaderProgram.Create(GL, "4.3.lighting_maps.vs", "4.3.lighting_maps.fs");
+            lampShaderProgram.Create(GL, "4.3.lamp.vs", "4.3.lamp.fs");
+
+            //使用当前着色器
+            cubeShaderProgram.Bind(GL);
+
+            //设置材质中的漫反射贴图为0号纹理单元
+            cubeShaderProgram.SetUniform1(GL, "material.diffuse", 0);
+
+            //设置材质中的高光贴图为1号纹理单元
+            cubeShaderProgram.SetUniform1(GL, "material.specular", 1);
+
+            //设置材质中的放射光贴图为2号纹理单元
+            cubeShaderProgram.SetUniform1(GL, "material.emission", 2);
 
             //创建立方体VAO
             cubeVAO.Create(GL);
@@ -282,11 +316,14 @@ namespace _3._1.materials
             GL.BufferData(OpenGL.GL_ARRAY_BUFFER, vertices, OpenGL.GL_STATIC_DRAW);
 
             //配置顶点属性
-            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 6 * sizeof(float), IntPtr.Zero);
+            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 8 * sizeof(float), IntPtr.Zero);
             GL.EnableVertexAttribArray(0);
 
-            GL.VertexAttribPointer(1, 3, OpenGL.GL_FLOAT, false, 6 * sizeof(float), new IntPtr(3*sizeof(float)));
+            GL.VertexAttribPointer(1, 3, OpenGL.GL_FLOAT, false, 8 * sizeof(float), new IntPtr(3 * sizeof(float)));
             GL.EnableVertexAttribArray(1);
+
+            GL.VertexAttribPointer(2, 2, OpenGL.GL_FLOAT, false, 8 * sizeof(float), new IntPtr(6 * sizeof(float)));
+            GL.EnableVertexAttribArray(2);
 
             //创建光源VAO
             lightVAO.Create(GL);
@@ -298,7 +335,7 @@ namespace _3._1.materials
             vbo.Bind(GL);
 
             //绑定数据
-            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 6 * sizeof(float), IntPtr.Zero);
+            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 8 * sizeof(float), IntPtr.Zero);
             GL.EnableVertexAttribArray(0);
 
             //设置窗体的大小
