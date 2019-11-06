@@ -3265,6 +3265,7 @@ namespace SharpGL
         public const uint GL_DEPTH_COMPONENT32_ARB = 0x81A7;
         public const uint GL_TEXTURE_DEPTH_SIZE_ARB = 0x884A;
         public const uint GL_DEPTH_TEXTURE_MODE_ARB = 0x884B;
+        public const uint GL_DEPTH24_STENCIL8_EXT = 0x88F0;
 
         #endregion
 
