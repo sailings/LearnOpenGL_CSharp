@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _1.colors
+namespace _2.stencil_testing
 {
     /// <summary>
     /// 摄像机移动方向

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _1.colors
+namespace _3._2.blending_sort
 {
     /// <summary>
     /// 摄像机移动方向
@@ -43,7 +43,7 @@ namespace _1.colors
         const float SENSITIVITY = 0.1f;
         const float ZOOM = 45.0f;
 
-        vec3 Position = new vec3(0.0f, 0.0f, 0.0f);
+        public vec3 Position { get; set; } = new vec3(0.0f, 0.0f, 0.0f);
         vec3 Front = new vec3(0.0f, 0.0f, -1.0f);
         vec3 Up = new vec3(0.0f, 1.0f,0.0f);
         vec3 Right;

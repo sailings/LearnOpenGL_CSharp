@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _1.colors
+namespace _1._2.depth_testing_view
 {
     /// <summary>
     /// 摄像机移动方向

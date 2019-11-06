@@ -83,7 +83,7 @@ namespace SharpGL.SceneGraph.Assets
         /// <param name="gl">The OpenGL object.</param>
         /// <param name="image">The image.</param>
         /// <returns>True if the texture was successfully loaded.</returns>
-        public virtual bool Create(OpenGL gl, Bitmap image)
+        public virtual bool Create(OpenGL gl, Bitmap image, bool rotateFlipY = true)
         {
             //  Create the underlying OpenGL object.
             Create(gl);
@@ -131,7 +131,8 @@ namespace SharpGL.SceneGraph.Assets
                 image = (Bitmap)newImage;
             }
 
-            image.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            if (rotateFlipY)
+                image.RotateFlip(RotateFlipType.RotateNoneFlipY);
 
             //  Lock the image bits (so that we can pass them to OGL).
             BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
@@ -169,7 +170,7 @@ namespace SharpGL.SceneGraph.Assets
         /// <param name="gl">The OpenGL object.</param>
         /// <param name="path">The path to the image file.</param>
         /// <returns>True if the texture was successfully loaded.</returns>
-        public virtual bool Create(OpenGL gl, string path)
+        public virtual bool Create(OpenGL gl, string path,bool rotateFlipY = true)
         {
             //  Try and load the bitmap. Return false on failure.
             using (Bitmap image = new Bitmap(path))
@@ -178,7 +179,7 @@ namespace SharpGL.SceneGraph.Assets
                     return false;
 
                 //  Call the main create function.
-                return Create(gl, image);
+                return Create(gl, image,rotateFlipY);
             }
         }
 

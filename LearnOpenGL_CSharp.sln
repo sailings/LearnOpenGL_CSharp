@@ -107,6 +107,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.multiple_lights", "LearnO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.model_loading", "LearnOpenGL\src\3.model_loading\1.model_loading\1.model_loading.csproj", "{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.1.depth_testing", "LearnOpenGL\src\4.advanced_opengl\1.1.depth_testing\1.1.depth_testing.csproj", "{B4C6F565-88B3-41A5-AEF6-3A2612E5736F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.2.depth_testing_view", "LearnOpenGL\src\4.advanced_opengl\1.2.depth_testing_view\1.2.depth_testing_view.csproj", "{85520B79-44DA-4FE1-B7EA-0C8D922E16AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.stencil_testing", "LearnOpenGL\src\4.advanced_opengl\2.stencil_testing\2.stencil_testing.csproj", "{44037891-0E84-446A-9AFA-218CD9DB9DA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.1.blending_discard", "LearnOpenGL\src\4.advanced_opengl\3.1.blending_discard\3.1.blending_discard.csproj", "{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.2.blending_sort", "LearnOpenGL\src\4.advanced_opengl\3.2.blending_sort\3.2.blending_sort.csproj", "{E03A2703-FDB1-4CAA-93C6-CB042AA809A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -277,6 +287,26 @@ Global
 		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C6F565-88B3-41A5-AEF6-3A2612E5736F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C6F565-88B3-41A5-AEF6-3A2612E5736F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C6F565-88B3-41A5-AEF6-3A2612E5736F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C6F565-88B3-41A5-AEF6-3A2612E5736F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85520B79-44DA-4FE1-B7EA-0C8D922E16AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85520B79-44DA-4FE1-B7EA-0C8D922E16AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85520B79-44DA-4FE1-B7EA-0C8D922E16AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85520B79-44DA-4FE1-B7EA-0C8D922E16AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44037891-0E84-446A-9AFA-218CD9DB9DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44037891-0E84-446A-9AFA-218CD9DB9DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44037891-0E84-446A-9AFA-218CD9DB9DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44037891-0E84-446A-9AFA-218CD9DB9DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03A2703-FDB1-4CAA-93C6-CB042AA809A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03A2703-FDB1-4CAA-93C6-CB042AA809A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03A2703-FDB1-4CAA-93C6-CB042AA809A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03A2703-FDB1-4CAA-93C6-CB042AA809A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -332,6 +362,11 @@ Global
 		{3E096332-CC30-41E7-A363-8E0482B64636} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{B8F5E6D5-2B70-42D2-A128-5AB2FB2395F8} = {4F5FDE49-618A-4198-AF01-D592CB275FC9}
 		{EFCEB806-85EE-40BC-95FF-8E81F3C6B011} = {2B8BD04D-057F-45B3-810D-D6116237AC23}
+		{B4C6F565-88B3-41A5-AEF6-3A2612E5736F} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{85520B79-44DA-4FE1-B7EA-0C8D922E16AA} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{44037891-0E84-446A-9AFA-218CD9DB9DA7} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{5DF2ED5C-7900-4E3C-A7ED-DF4E2A2479C0} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{E03A2703-FDB1-4CAA-93C6-CB042AA809A1} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}
