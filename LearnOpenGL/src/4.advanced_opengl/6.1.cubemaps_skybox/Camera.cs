@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _5._2.framebuffers_exercise1
+namespace _6._1.cubemaps_skybox
 {
     /// <summary>
     /// 摄像机移动方向

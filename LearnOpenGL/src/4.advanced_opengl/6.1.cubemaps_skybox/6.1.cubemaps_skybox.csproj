@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1E1BF643-A25A-4F02-9904-88FA89EA667B}</ProjectGuid>
+    <ProjectGuid>{20459FEE-2111-4421-9FF6-BCBA8A237F34}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>_5._2.framebuffers_exercise1</RootNamespace>
-    <AssemblyName>5.2.framebuffers_exercise1</AssemblyName>
+    <RootNamespace>_6._1.cubemaps_skybox</RootNamespace>
+    <AssemblyName>6.1.cubemaps_skybox</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -69,16 +69,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="5.2.framebuffers.fs">
+    <None Include="6.1.cubemaps.fs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="5.2.framebuffers.vs">
+    <None Include="6.1.cubemaps.vs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="5.2.framebuffers_screen.fs">
+    <None Include="6.1.skybox.fs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="5.2.framebuffers_screen.vs">
+    <None Include="6.1.skybox.vs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -109,7 +109,22 @@
     <Content Include="marble.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="metal.png">
+    <Content Include="skybox\back.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="skybox\bottom.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="skybox\front.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="skybox\left.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="skybox\right.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="skybox\top.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

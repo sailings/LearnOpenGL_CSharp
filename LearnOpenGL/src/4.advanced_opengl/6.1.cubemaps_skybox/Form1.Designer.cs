@@ -1,4 +1,4 @@
-﻿namespace _5._2.framebuffers_exercise1
+﻿namespace _6._1.cubemaps_skybox
 {
     partial class Form1
     {

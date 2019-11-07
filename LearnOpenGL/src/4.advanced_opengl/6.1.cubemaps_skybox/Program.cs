@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace _5._2.framebuffers_exercise1
+namespace _6._1.cubemaps_skybox
 {
     static class Program
     {

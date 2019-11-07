@@ -13,7 +13,7 @@ using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 using GlmNet;
 
-namespace _5._2.framebuffers_exercise1
+namespace _6._1.cubemaps_skybox
 {
     public partial class Form1 : Form
     {
@@ -85,30 +85,49 @@ namespace _5._2.framebuffers_exercise1
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
-        /// <summary>
-        /// 平面顶点
-        /// </summary>
-        private float[] planeVertices = {
-        //位置                //纹理坐标
-         5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
-        -5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
-        -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
-         5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
-        -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
-         5.0f, -0.5f, -5.0f,  2.0f, 2.0f
-    };
+        private float[] skyboxVertices = {
+        // positions          
+        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
 
-        /// <summary>
-        /// 平面
-        /// </summary>
-        private float[] quadVertices = {
-        //位置         //纹理坐标
-        -0.3f,  1.0f,  0.0f, 1.0f,
-        -0.3f,  0.7f,  0.0f, 0.0f,
-         0.3f,  0.7f,  1.0f, 0.0f,
-        -0.3f,  1.0f,  0.0f, 1.0f,
-         0.3f,  0.7f,  1.0f, 0.0f,
-         0.3f,  1.0f,  1.0f, 1.0f
+        -1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+        -1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f
     };
 
         /// <summary>
@@ -119,7 +138,7 @@ namespace _5._2.framebuffers_exercise1
         /// <summary>
         /// 
         /// </summary>
-        private ShaderProgram screenShader = new ShaderProgram();
+        private ShaderProgram skyboxShader = new ShaderProgram();
 
         /// <summary>
         /// cubeVAO
@@ -127,25 +146,10 @@ namespace _5._2.framebuffers_exercise1
         VertexBufferArray cubeVAO = new VertexBufferArray();
 
         /// <summary>
-        /// planeVAO
+        /// 
         /// </summary>
-        VertexBufferArray planeVAO = new VertexBufferArray();
-
-        /// <summary>
-        /// quadVAO
-        /// </summary>
-        VertexBufferArray quadVAO = new VertexBufferArray();
-
-        /// <summary>
-        /// cubeTexture
-        /// </summary>
-        private Texture cubeTexture = new Texture();
-
-        /// <summary>
-        /// floorTexture
-        /// </summary>
-        private Texture floorTexture = new Texture();
-
+        VertexBufferArray skyboxVAO = new VertexBufferArray();
+              
         private DateTime startTime = DateTime.Now;
 
         //摄像机对象
@@ -158,10 +162,19 @@ namespace _5._2.framebuffers_exercise1
         float deltaTime = 0.0f;
         float lastFrame = 0.0f;
 
-        /// <summary>
-        /// 帧缓冲ID和颜色缓冲ID
-        /// </summary>
-        uint framebuffer, textureColorbuffer;
+        Texture cubeTexture = new Texture();
+
+        List<string> faces = new List<string>
+        {
+            "skybox/right.jpg",
+            "skybox/left.jpg",
+            "skybox/top.jpg",
+            "skybox/bottom.jpg",
+            "skybox/front.jpg",
+            "skybox/back.jpg"
+        };
+
+        uint cubemapTexture;
 
         public Form1()
         {
@@ -172,7 +185,8 @@ namespace _5._2.framebuffers_exercise1
 
             //创建纹理
             cubeTexture.Create(GL, "marble.jpg");
-            floorTexture.Create(GL, "metal.png");
+            cubemapTexture = LoadCubemap(faces);
+            //floorTexture.Create(GL, "metal.png");
         }
 
         private void OpenGLControl1_MouseMove(object sender, MouseEventArgs e)
@@ -223,109 +237,45 @@ namespace _5._2.framebuffers_exercise1
             deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
 
-            //绑定到帧缓冲
-            GL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, framebuffer);
-            //启用深度测试
-            GL.Enable(OpenGL.GL_DEPTH_TEST);
-
-            //清除颜色和深度缓冲
             GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
             GL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
-            //使用着色器
+            // draw scene as normal
+            //shader.use();
             GL.UseProgram(shader.ShaderProgramObject);
-
-            //传递矩阵
             mat4 model = new mat4(1.0f);
-            camera.Yaw += 180.0f;
-            camera.Pitch += 180.0f;
-            camera.ProcessMouseMovement(0, 0, false);
             mat4 view = camera.GetViewMatrix();
-            camera.Yaw -= 180.0f;
-            camera.Pitch -= 180.0f;
-            camera.ProcessMouseMovement(0, 0, true);
             mat4 projection = glm.perspective(glm.radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+            shader.SetUniformMatrix4(GL,"model", model.to_array());
             shader.SetUniformMatrix4(GL,"view", view.to_array());
             shader.SetUniformMatrix4(GL,"projection", projection.to_array());
-           
-            //绑定立方体VAO
+            // cubes
+            //glBindVertexArray(cubeVAO);
             cubeVAO.Bind(GL);
-            //激活纹理单元
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
-            //绑定贴图
+            //glBindTexture(GL_TEXTURE_2D, cubeTexture);
             cubeTexture.Bind(GL);
-            //设置模型矩阵
-            model = glm.translate(model, new vec3(-1.0f, 0.0f, -1.0f));
-            shader.SetUniformMatrix4(GL,"model", model.to_array());
-            //绘制
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
+            //glBindVertexArray(0);
+            cubeVAO.Unbind(GL);
 
-            //传递模型矩阵
-            model = new mat4(1.0f);
-            model = glm.translate(model, new vec3(2.0f, 0.0f, 0.0f));
-            shader.SetUniformMatrix4(GL, "model", model.to_array());
-            //绘制第二个立方体
-            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
-
-            //绑定地面VAO
-            planeVAO.Bind(GL);
-            //绑定贴图
-            floorTexture.Bind(GL);
-            //传递模型矩阵
-            shader.SetUniformMatrix4(GL,"model", new mat4(1.0f).to_array());
-            //绘制地面
-            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
-
-            //重新绑定到默认的帧缓冲中
-            GL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
-
-            //清除颜色和深度缓冲
-            GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-            GL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-
-            //设置观察矩阵
-            model = new mat4(1.0f);
-            view = camera.GetViewMatrix();
-            shader.SetUniformMatrix4(GL,"view", view.to_array());
-
-            //绑定立方体VAO
-            cubeVAO.Bind(GL);
-            //激活纹理单元
+            // draw skybox as last
+            GL.DepthFunc(OpenGL.GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+            //skyboxShader.use();
+            GL.UseProgram(skyboxShader.ShaderProgramObject);
+            ///////view = new mat4(new mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+            skyboxShader.SetUniformMatrix4(GL,"view", view.to_array());
+            skyboxShader.SetUniformMatrix4(GL,"projection", projection.to_array());
+            // skybox cube
+            //glBindVertexArray(skyboxVAO);
+            skyboxVAO.Bind(GL);
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
-            //绑定立方体贴图
-            cubeTexture.Bind(GL);
-            //传递模型矩阵
-            model = glm.translate(model, new vec3(-1.0f, 0.0f, -1.0f));
-            shader.SetUniformMatrix4(GL,"model", model.to_array());
-            //绘制
+            //glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+            GL.BindTexture(OpenGL.GL_TEXTURE_CUBE_MAP,cubemapTexture);
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
-
-            //传递模型矩阵
-            model = new mat4(1.0f);
-            model = glm.translate(model, new vec3(2.0f, 0.0f, 0.0f));
-            shader.SetUniformMatrix4(GL, "model", model.to_array());
-            //绘制第二个立方体
-            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
-
-            //绑定地面VAO
-            planeVAO.Bind(GL);
-            //绑定贴图
-            floorTexture.Bind(GL);
-            //传递模型矩阵
-            shader.SetUniformMatrix4(GL,"model", new mat4(1.0f).to_array());
-            //绘制地面
-            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
-
-            //禁用深度测试
-            GL.Disable(OpenGL.GL_DEPTH_TEST);
-            //使用当前着色器
-            GL.UseProgram(screenShader.ShaderProgramObject);
-            //绑定VAO
-            quadVAO.Bind(GL);
-            //绑定贴图
-            GL.BindTexture(OpenGL.GL_TEXTURE_2D, textureColorbuffer);
-            //绘制
-            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+            skyboxVAO.Unbind(GL);
+            //glBindVertexArray(0);
+            GL.DepthFunc(OpenGL.GL_LESS); // set depth function back to default
 
             //设置标题，显示FPS
             Text = title + $"-FPS[{openGLControl1.FPS}]";
@@ -345,16 +295,16 @@ namespace _5._2.framebuffers_exercise1
             GL.Enable(OpenGL.GL_DEPTH_TEST);            
 
             //创建着色器
-            shader.Create(GL,"5.2.framebuffers.vs", "5.2.framebuffers.fs");
-            screenShader.Create(GL,"5.2.framebuffers_screen.vs", "5.2.framebuffers_screen.fs");
+            shader.Create(GL,"6.1.cubemaps.vs", "6.1.cubemaps.fs");
+            skyboxShader.Create(GL,"6.1.skybox.vs", "6.1.skybox.fs");
 
             //使用当前着色器
             GL.UseProgram(shader.ShaderProgramObject);
             //设置片元着色器中的texture1为0号纹理单元
             shader.SetUniform1(GL, "texture1", 0);
 
-            GL.UseProgram(screenShader.ShaderProgramObject);
-            screenShader.SetUniform1(GL, "screenTexture", 0);
+            GL.UseProgram(skyboxShader.ShaderProgramObject);
+            skyboxShader.SetUniform1(GL, "skybox", 0);
 
             //创建立方体VAO
             cubeVAO.Create(GL);
@@ -372,72 +322,22 @@ namespace _5._2.framebuffers_exercise1
             GL.EnableVertexAttribArray(1);
             cubeVAO.Unbind(GL);
 
-            //创建平面VAO
-            planeVAO.Create(GL);
-            planeVAO.Bind(GL);
+            skyboxVAO.Create(GL);
+            skyboxVAO.Bind(GL);
             //重新设置vbo数据
             vbo = new VertexBuffer();
             vbo.Create(GL);
             vbo.Bind(GL);
             //绑定数据
-            GL.BufferData(OpenGL.GL_ARRAY_BUFFER, planeVertices, OpenGL.GL_STATIC_DRAW);
+            GL.BufferData(OpenGL.GL_ARRAY_BUFFER, skyboxVertices, OpenGL.GL_STATIC_DRAW);
             //配置顶点属性
-            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 5 * sizeof(float), IntPtr.Zero);
+            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 3 * sizeof(float), IntPtr.Zero);
             GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(1, 2, OpenGL.GL_FLOAT, false, 5 * sizeof(float), new IntPtr(3 * sizeof(float)));
-            GL.EnableVertexAttribArray(1);
-            planeVAO.Unbind(GL);
+            skyboxVAO.Unbind(GL);
 
-            quadVAO.Create(GL);
-            quadVAO.Bind(GL);
-            vbo = new VertexBuffer();
-            vbo.Create(GL);
-            vbo.Bind(GL);
-            //绑定数据
-            GL.BufferData(OpenGL.GL_ARRAY_BUFFER, quadVertices, OpenGL.GL_STATIC_DRAW);
-            //配置顶点属性
-            GL.VertexAttribPointer(0, 2, OpenGL.GL_FLOAT, false, 4 * sizeof(float), IntPtr.Zero);
-            GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(1, 2, OpenGL.GL_FLOAT, false, 4 * sizeof(float), new IntPtr(2 * sizeof(float)));
-            GL.EnableVertexAttribArray(1);
-            quadVAO.Unbind(GL);
-
-            //创建帧缓冲
-            uint[] ids = new uint[1];
-            GL.GenFramebuffersEXT(1, ids);
-            framebuffer = ids[0];
-            //绑定帧缓冲
-            GL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, framebuffer);
-
-            //生成纹理
-            GL.GenTextures(1, ids);
-            textureColorbuffer = ids[0];
-            //绑定纹理
-            GL.BindTexture(OpenGL.GL_TEXTURE_2D, textureColorbuffer);
-            GL.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, OpenGL.GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, OpenGL.GL_RGB, OpenGL.GL_UNSIGNED_BYTE, IntPtr.Zero);
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR);
-            GL.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_LINEAR);
-            //将纹理作为帧缓冲的附件
-            GL.FramebufferTexture2DEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_TEXTURE_2D, textureColorbuffer, 0);
-
-            //生成渲染缓冲
-            GL.GenRenderbuffersEXT(1, ids);
-            uint rbo = ids[0];
-            //绑定渲染缓冲
-            GL.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, rbo);
-            //设置渲染缓冲
-            GL.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH24_STENCIL8_EXT, SCR_WIDTH, SCR_HEIGHT);
-            GL.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER, rbo);
-            if (GL.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) != OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT)
-            {
-                //error
-            }
-
-            //重新绑定到默认的帧缓冲中
-            GL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
-
-            //GL.PolygonMode(OpenGL.GL_FRONT_AND_BACK, OpenGL.GL_LINE);
-
+            //使用当前着色器
+            //GL.UseProgram(shader.ShaderProgramObject);
+           
             //设置窗体的大小
             Size = new Size(SCR_WIDTH, SCR_HEIGHT);
         }
@@ -454,6 +354,27 @@ namespace _5._2.framebuffers_exercise1
                 camera.ProcessKeyboard(Camera_Movement.RIGHT, deltaTime);
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private uint LoadCubemap(List<string> faces)
+        {
+            uint[] ids = new uint[1];
+            GL.GenTextures(1, ids);
+            uint textureID = ids[0];
+            GL.BindTexture(OpenGL.GL_TEXTURE_CUBE_MAP, textureID);
+
+            for (int i = 0; i < faces.Count; i++)
+            {
+                Texture texture = new Texture();
+                texture.Create(GL, faces[i], i == 2 || i == 5, (uint)(OpenGL.GL_TEXTURE_CUBE_MAP_POSITIVE_X + i));
+            }
+            GL.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR);
+            GL.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_LINEAR);
+            GL.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_WRAP_S, OpenGL.GL_CLAMP_TO_EDGE);
+            GL.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_CLAMP_TO_EDGE);
+            GL.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_WRAP_R, OpenGL.GL_CLAMP_TO_EDGE);
+
+            return textureID;
         }
     }
 }

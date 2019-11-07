@@ -83,7 +83,7 @@ namespace SharpGL.SceneGraph.Assets
         /// <param name="gl">The OpenGL object.</param>
         /// <param name="image">The image.</param>
         /// <returns>True if the texture was successfully loaded.</returns>
-        public virtual bool Create(OpenGL gl, Bitmap image, bool rotateFlipY = true)
+        public virtual bool Create(OpenGL gl, Bitmap image, bool rotateFlipY = true,uint imageTarget = OpenGL.GL_TEXTURE_2D)
         {
             //  Create the underlying OpenGL object.
             Create(gl);
@@ -146,7 +146,7 @@ namespace SharpGL.SceneGraph.Assets
             gl.BindTexture(OpenGL.GL_TEXTURE_2D, TextureName);
 
             //  Set the image data.
-            gl.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, (int)OpenGL.GL_RGBA,
+            gl.TexImage2D(imageTarget, 0, (int)OpenGL.GL_RGBA,
                 width, height, 0, OpenGL.GL_BGRA, OpenGL.GL_UNSIGNED_BYTE,
                 bitmapData.Scan0);
 
@@ -170,7 +170,7 @@ namespace SharpGL.SceneGraph.Assets
         /// <param name="gl">The OpenGL object.</param>
         /// <param name="path">The path to the image file.</param>
         /// <returns>True if the texture was successfully loaded.</returns>
-        public virtual bool Create(OpenGL gl, string path,bool rotateFlipY = true)
+        public virtual bool Create(OpenGL gl, string path,bool rotateFlipY = true, uint imageTarget = OpenGL.GL_TEXTURE_2D)
         {
             //  Try and load the bitmap. Return false on failure.
             using (Bitmap image = new Bitmap(path))
@@ -179,7 +179,7 @@ namespace SharpGL.SceneGraph.Assets
                     return false;
 
                 //  Call the main create function.
-                return Create(gl, image,rotateFlipY);
+                return Create(gl, image, rotateFlipY, imageTarget);
             }
         }
 
