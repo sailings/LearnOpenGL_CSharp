@@ -42,7 +42,7 @@ namespace _5._1.framebuffers
         /// </summary>
         private float[] cubeVertices = {
         //位置                //纹理坐标
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
          0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -93,7 +93,6 @@ namespace _5._1.framebuffers
          5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
         -5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
         -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
-
          5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
         -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
          5.0f, -0.5f, -5.0f,  2.0f, 2.0f
@@ -104,13 +103,12 @@ namespace _5._1.framebuffers
         /// </summary>
         private float[] quadVertices = {
         //位置         //纹理坐标
-        -1.0f,  1.0f,  0.0f, 1.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-
-        -1.0f,  1.0f,  0.0f, 1.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-         1.0f,  1.0f,  1.0f, 1.0f
+        -0.3f,  1.0f,  0.0f, 1.0f,
+        -0.3f,  0.7f,  0.0f, 0.0f,
+         0.3f,  0.7f,  1.0f, 0.0f,
+        -0.3f,  1.0f,  0.0f, 1.0f,
+         0.3f,  0.7f,  1.0f, 0.0f,
+         0.3f,  1.0f,  1.0f, 1.0f
     };
 
         /// <summary>
@@ -237,58 +235,95 @@ namespace _5._1.framebuffers
             //使用着色器
             GL.UseProgram(shader.ShaderProgramObject);
 
-            //设置投影和观察矩阵
+            //传递矩阵
             mat4 model = new mat4(1.0f);
+            camera.Yaw += 180.0f;
+            camera.Pitch += 180.0f;
+            camera.ProcessMouseMovement(0, 0, false);
             mat4 view = camera.GetViewMatrix();
+            camera.Yaw -= 180.0f;
+            camera.Pitch -= 180.0f;
+            camera.ProcessMouseMovement(0, 0, true);
             mat4 projection = glm.perspective(glm.radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
             shader.SetUniformMatrix4(GL,"view", view.to_array());
             shader.SetUniformMatrix4(GL,"projection", projection.to_array());
-
+           
             //绑定立方体VAO
             cubeVAO.Bind(GL);
-            //激活纹理单元0
+            //激活纹理单元
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
-            //绑定纹理
+            //绑定贴图
             cubeTexture.Bind(GL);
             //设置模型矩阵
             model = glm.translate(model, new vec3(-1.0f, 0.0f, -1.0f));
             shader.SetUniformMatrix4(GL,"model", model.to_array());
-            //绘制第一个立方体
+            //绘制
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
 
-            //设置模型矩阵
+            //传递模型矩阵
             model = new mat4(1.0f);
             model = glm.translate(model, new vec3(2.0f, 0.0f, 0.0f));
             shader.SetUniformMatrix4(GL, "model", model.to_array());
-            //绘制第二个矩阵
+            //绘制第二个立方体
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
 
-            //绑定平面VAO
+            //绑定地面VAO
             planeVAO.Bind(GL);
-            //绑定纹理
+            //绑定贴图
             floorTexture.Bind(GL);
-            //设置模型矩阵
+            //传递模型矩阵
             shader.SetUniformMatrix4(GL,"model", new mat4(1.0f).to_array());
-            //绘制平面
+            //绘制地面
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
             //重新绑定到默认的帧缓冲中
             GL.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
 
+            //清除颜色和深度缓冲
+            GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+            GL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+
+            //设置观察矩阵
+            model = new mat4(1.0f);
+            view = camera.GetViewMatrix();
+            shader.SetUniformMatrix4(GL,"view", view.to_array());
+
+            //绑定立方体VAO
+            cubeVAO.Bind(GL);
+            //激活纹理单元
+            GL.ActiveTexture(OpenGL.GL_TEXTURE0);
+            //绑定立方体贴图
+            cubeTexture.Bind(GL);
+            //传递模型矩阵
+            model = glm.translate(model, new vec3(-1.0f, 0.0f, -1.0f));
+            shader.SetUniformMatrix4(GL,"model", model.to_array());
+            //绘制
+            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
+
+            //传递模型矩阵
+            model = new mat4(1.0f);
+            model = glm.translate(model, new vec3(2.0f, 0.0f, 0.0f));
+            shader.SetUniformMatrix4(GL, "model", model.to_array());
+            //绘制第二个立方体
+            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
+
+            //绑定地面VAO
+            planeVAO.Bind(GL);
+            //绑定贴图
+            floorTexture.Bind(GL);
+            //传递模型矩阵
+            shader.SetUniformMatrix4(GL,"model", new mat4(1.0f).to_array());
+            //绘制地面
+            GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+
             //禁用深度测试
             GL.Disable(OpenGL.GL_DEPTH_TEST);
-
-            //清除颜色缓冲
-            GL.ClearColor(0.0f, 1.0f, 1.0f, 1.0f);
-            GL.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
-
-            //使用screenShader
+            //使用当前着色器
             GL.UseProgram(screenShader.ShaderProgramObject);
-            //绑定vao
+            //绑定VAO
             quadVAO.Bind(GL);
-            //绑定前面操作的颜色缓冲(纹理)
+            //绑定贴图
             GL.BindTexture(OpenGL.GL_TEXTURE_2D, textureColorbuffer);
-
             //绘制
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
@@ -310,8 +345,8 @@ namespace _5._1.framebuffers
             GL.Enable(OpenGL.GL_DEPTH_TEST);            
 
             //创建着色器
-            shader.Create(GL,"5.1.framebuffers.vs", "5.1.framebuffers.fs");
-            screenShader.Create(GL,"5.1.framebuffers_screen.vs", "5.1.framebuffers_screen.fs");
+            shader.Create(GL,"5.2.framebuffers.vs", "5.2.framebuffers.fs");
+            screenShader.Create(GL,"5.2.framebuffers_screen.vs", "5.2.framebuffers_screen.fs");
 
             //使用当前着色器
             GL.UseProgram(shader.ShaderProgramObject);
