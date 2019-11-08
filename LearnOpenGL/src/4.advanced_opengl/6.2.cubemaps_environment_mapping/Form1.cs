@@ -13,7 +13,7 @@ using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
 using GlmNet;
 
-namespace _6._1.cubemaps_skybox
+namespace _6._2.cubemaps_environment_mapping
 {
     public partial class Form1 : Form
     {
@@ -41,48 +41,48 @@ namespace _6._1.cubemaps_skybox
         /// 立方体顶点
         /// </summary>
         private float[] cubeVertices = {
-        //位置                //纹理坐标
-         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        //位置                //法线
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
         /// <summary>
@@ -165,11 +165,6 @@ namespace _6._1.cubemaps_skybox
         float lastFrame = 0.0f;
 
         /// <summary>
-        /// 立方体贴图
-        /// </summary>
-        Texture cubeTexture = new Texture();
-
-        /// <summary>
         /// 天空盒立方体纹理
         /// </summary>
         uint cubemapTexture;
@@ -195,7 +190,6 @@ namespace _6._1.cubemaps_skybox
             openGLControl1.MouseMove += OpenGLControl1_MouseMove;
 
             //创建纹理
-            cubeTexture.Create(GL, "marble.jpg");
             cubemapTexture = LoadCubemap(faces);
         }
 
@@ -247,6 +241,7 @@ namespace _6._1.cubemaps_skybox
             deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
 
+            //清除颜色和深度缓冲
             GL.ClearColor(0.1f, 0.1f, 0.1f, 1.0f);
             GL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
@@ -260,21 +255,23 @@ namespace _6._1.cubemaps_skybox
             shader.SetUniformMatrix4(GL,"model", model.to_array());
             shader.SetUniformMatrix4(GL,"view", view.to_array());
             shader.SetUniformMatrix4(GL,"projection", projection.to_array());
+            //设置摄像机位置
+            shader.SetUniform3(GL,"cameraPos", camera.Position.x,camera.Position.y,camera.Position.z);
 
             //绑定立方体VAO
             cubeVAO.Bind(GL);
             //激活纹理单元
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
             //绑定贴图
-            cubeTexture.Bind(GL);
-            //绘制立方体
+            GL.BindTexture(OpenGL.GL_TEXTURE_CUBE_MAP,cubemapTexture);
+            //绘制
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
             //解绑VAO
             cubeVAO.Unbind(GL);
 
-            //以下绘制天空盒
             //修改深度比较函数，让天空盒绘制在物体后面
-            GL.DepthFunc(OpenGL.GL_LEQUAL); 
+            GL.DepthFunc(OpenGL.GL_LEQUAL);
+
             //使用着色器
             GL.UseProgram(skyboxShader.ShaderProgramObject);
             //移除观察矩阵中的位移
@@ -282,19 +279,19 @@ namespace _6._1.cubemaps_skybox
             //传递观察和投影矩阵
             skyboxShader.SetUniformMatrix4(GL,"view", view.to_array());
             skyboxShader.SetUniformMatrix4(GL,"projection", projection.to_array());
-            //绑定天空盒VAO
+            //绑定VAO
             skyboxVAO.Bind(GL);
             //激活纹理单元
             GL.ActiveTexture(OpenGL.GL_TEXTURE0);
             //绑定贴图
             GL.BindTexture(OpenGL.GL_TEXTURE_CUBE_MAP,cubemapTexture);
-            //绘制天空盒
+            //绘制
             GL.DrawArrays(OpenGL.GL_TRIANGLES, 0, 36);
-            //解绑VAO
+            //解绑
             skyboxVAO.Unbind(GL);
             //恢复深度比较函数
-            GL.DepthFunc(OpenGL.GL_LESS);
-
+            GL.DepthFunc(OpenGL.GL_LESS); 
+            
             //设置标题，显示FPS
             Text = title + $"-FPS[{openGLControl1.FPS}]";
         }
@@ -313,13 +310,13 @@ namespace _6._1.cubemaps_skybox
             GL.Enable(OpenGL.GL_DEPTH_TEST);            
 
             //创建着色器
-            shader.Create(GL,"6.1.cubemaps.vs", "6.1.cubemaps.fs");
-            skyboxShader.Create(GL,"6.1.skybox.vs", "6.1.skybox.fs");
+            shader.Create(GL,"6.2.cubemaps.vs", "6.2.cubemaps.fs");
+            skyboxShader.Create(GL,"6.2.skybox.vs", "6.2.skybox.fs");
 
             //使用当前着色器
             GL.UseProgram(shader.ShaderProgramObject);
-            //设置片元着色器中的texture1为0号纹理单元
-            shader.SetUniform1(GL, "texture1", 0);
+            //设置片元着色器中的skybox为0号纹理单元
+            shader.SetUniform1(GL, "skybox", 0);
 
             GL.UseProgram(skyboxShader.ShaderProgramObject);
             skyboxShader.SetUniform1(GL, "skybox", 0);
@@ -334,9 +331,9 @@ namespace _6._1.cubemaps_skybox
             //绑定数据
             GL.BufferData(OpenGL.GL_ARRAY_BUFFER, cubeVertices, OpenGL.GL_STATIC_DRAW);
             //配置顶点属性
-            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 5 * sizeof(float), IntPtr.Zero);
+            GL.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 6 * sizeof(float), IntPtr.Zero);
             GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(1, 2, OpenGL.GL_FLOAT, false, 5 * sizeof(float), new IntPtr(3 * sizeof(float)));
+            GL.VertexAttribPointer(1, 3, OpenGL.GL_FLOAT, false, 6 * sizeof(float), new IntPtr(3 * sizeof(float)));
             GL.EnableVertexAttribArray(1);
             cubeVAO.Unbind(GL);
 
