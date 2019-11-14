@@ -10,6 +10,7 @@ namespace SharpGL.Shaders
     {
         private readonly Shader vertexShader = new Shader();
         private readonly Shader fragmentShader = new Shader();
+        private readonly Shader geometryShader = new Shader();
 
         public Shader FragmentShader
         {
@@ -27,15 +28,20 @@ namespace SharpGL.Shaders
         /// <param name="attributeLocations">The attribute locations. This is an optional array of
         /// uint attribute locations to their names.</param>
         /// <exception cref="ShaderCompilationException"></exception>
-        public void Create(OpenGL gl, string vertexShaderSource, string fragmentShaderSource, 
-            Dictionary<uint, string> attributeLocations)
+        public void CreateFromSource(OpenGL gl, string vertexShaderSource, string fragmentShaderSource,string geometryShaderSource="",
+            Dictionary<uint, string> attributeLocations=null)
         {
             //  Create the shaders.
             vertexShader.Create(gl, OpenGL.GL_VERTEX_SHADER, vertexShaderSource);
             fragmentShader.Create(gl, OpenGL.GL_FRAGMENT_SHADER, fragmentShaderSource);
 
-            //  Create the program, attach the shaders.
             shaderProgramObject = gl.CreateProgram();
+            if (!string.IsNullOrEmpty(geometryShaderSource))
+            {
+                geometryShader.Create(gl,OpenGL.GL_GEOMETRY_SHADER, geometryShaderSource);
+                gl.AttachShader(shaderProgramObject, geometryShader.ShaderObject);
+            }
+            //  Create the program, attach the shaders.
             gl.AttachShader(shaderProgramObject, vertexShader.ShaderObject);
             gl.AttachShader(shaderProgramObject, fragmentShader.ShaderObject);
 
@@ -57,9 +63,9 @@ namespace SharpGL.Shaders
             }
         }
 
-        public void Create(OpenGL gl, string vertexFile, string fragmentFile)
+        public void Create(OpenGL gl, string vertexFile, string fragmentFile,string geometryFile="")
         {
-            string vertexShaderSource, fragmentShaderSource;
+            string vertexShaderSource, fragmentShaderSource, geometryShaderSource="";
             using (StreamReader sr = new StreamReader(vertexFile))
             {
                 vertexShaderSource = sr.ReadToEnd();
@@ -68,7 +74,14 @@ namespace SharpGL.Shaders
             {
                 fragmentShaderSource = sr.ReadToEnd();
             }
-            Create(gl, vertexShaderSource, fragmentShaderSource, null);
+            if (!string.IsNullOrEmpty(geometryFile))
+            {
+                using (StreamReader sr = new StreamReader(geometryFile))
+                {
+                    geometryShaderSource = sr.ReadToEnd();
+                }
+            }
+            CreateFromSource(gl, vertexShaderSource, fragmentShaderSource, geometryShaderSource, null);
         }
 
         public void Delete(OpenGL gl)

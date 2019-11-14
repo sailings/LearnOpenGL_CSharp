@@ -125,6 +125,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.1.cubemaps_skybox", "Lear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.2.cubemaps_environment_mapping", "LearnOpenGL\src\4.advanced_opengl\6.2.cubemaps_environment_mapping\6.2.cubemaps_environment_mapping.csproj", "{F01465C0-E77A-4A0B-8A2E-70F030DF0703}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8.advanced_glsl_ubo", "LearnOpenGL\src\4.advanced_opengl\8.advanced_glsl_ubo\8.advanced_glsl_ubo.csproj", "{027431BB-120C-4DFA-B087-353C840DCBFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.1.geometry_shader_houses", "LearnOpenGL\src\4.advanced_opengl\9.1.geometry_shader_houses\9.1.geometry_shader_houses.csproj", "{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.2.geometry_shader_exploding", "LearnOpenGL\src\4.advanced_opengl\9.2.geometry_shader_exploding\9.2.geometry_shader_exploding.csproj", "{2247F399-2F72-4A69-8665-B8FBC3532740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.3.geometry_shader_normals", "LearnOpenGL\src\4.advanced_opengl\9.3.geometry_shader_normals\9.3.geometry_shader_normals.csproj", "{958041A5-EF9F-4638-9928-5AD3EEDAEBBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,6 +339,22 @@ Global
 		{F01465C0-E77A-4A0B-8A2E-70F030DF0703}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F01465C0-E77A-4A0B-8A2E-70F030DF0703}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F01465C0-E77A-4A0B-8A2E-70F030DF0703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027431BB-120C-4DFA-B087-353C840DCBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027431BB-120C-4DFA-B087-353C840DCBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027431BB-120C-4DFA-B087-353C840DCBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027431BB-120C-4DFA-B087-353C840DCBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2247F399-2F72-4A69-8665-B8FBC3532740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2247F399-2F72-4A69-8665-B8FBC3532740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2247F399-2F72-4A69-8665-B8FBC3532740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2247F399-2F72-4A69-8665-B8FBC3532740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{958041A5-EF9F-4638-9928-5AD3EEDAEBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958041A5-EF9F-4638-9928-5AD3EEDAEBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958041A5-EF9F-4638-9928-5AD3EEDAEBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958041A5-EF9F-4638-9928-5AD3EEDAEBBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -395,6 +419,10 @@ Global
 		{1E1BF643-A25A-4F02-9904-88FA89EA667B} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
 		{20459FEE-2111-4421-9FF6-BCBA8A237F34} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
 		{F01465C0-E77A-4A0B-8A2E-70F030DF0703} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{027431BB-120C-4DFA-B087-353C840DCBFF} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{DC62D6A8-60E6-40B7-94DA-4C5F564EFB78} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{2247F399-2F72-4A69-8665-B8FBC3532740} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
+		{958041A5-EF9F-4638-9928-5AD3EEDAEBBA} = {56F0DEBA-F10B-4A67-959C-925F18DE9290}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38D03FF-7755-42F9-8619-5E5C8D490F26}
